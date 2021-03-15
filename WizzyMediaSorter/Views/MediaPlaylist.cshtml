@@ -1,0 +1,65 @@
+﻿@using WizzyMediaSorter.Extension
+@using WizzyMediaSorter.Controllers
+
+@inherits UmbracoViewPage<MediaPlaylist>
+@{
+    Layout = "Master.cshtml";
+    var mediaID = Request.QueryString["id"];
+    var mediaNode = Umbraco.Content(mediaID);
+    var playListGroupNode = Umbraco.ContentFromUmbraco<PlaylistGroup>("Node.Playlists");
+
+
+}
+
+
+<div class="media-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-listing page-listing__title-wrapper">
+                    <div>
+                        @Model.Title
+                    </div>
+
+                    <div>
+                        @Umbraco.Media(mediaID).Name
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @foreach (var playlist in playListGroupNode.Children)
+        {
+            <div class="page-listing__wrapper">
+                <div class="row">
+                    <div class="col-md-9 col-sm-12">
+                        @playlist.Name
+
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <div class="page-listing__crud">
+                            <span>
+                                @{
+                                    using (Html.BeginUmbracoForm("SelectMyMedia", "SelectPlaylistMedia", FormMethod.Post))
+                                    {
+                                        <input type="hidden" value="@playlist.Id" name="playlistId" />
+                                        <input type="hidden" value="@mediaID" name="mediaId" />
+                                        <button type="submit" class=" wizzy-btn">
+                                            <i class="fa fa-folder-plus "></i>
+                                            Add to Playlist
+                                        </button>
+                                    }
+                                }
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+

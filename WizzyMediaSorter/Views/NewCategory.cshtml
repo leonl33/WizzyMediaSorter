@@ -1,0 +1,36 @@
+﻿@using WizzyMediaSorter.Models
+
+@inherits UmbracoViewPage<CreateCategory>
+@{
+    Layout = "Master.cshtml";
+    var model = new CreateCategoryModel();
+}
+
+
+<div class="categories-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-listing page-listing__title-wrapper">
+                    @Model.Title
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+                @{
+                    using (Html.BeginUmbracoForm("CategoryCreation", "CreateCategory", FormMethod.Post))
+                    {
+                        <input type="text" placeholder="Category Title" class="page-listing__input" name="@Html.NameFor(x=>model.CategoryName)" runat="server" />
+                        <div class="wizzy-btn__wrapper">
+                            <button type="submit" class="wizzy-btn"> Create Category</button>
+                        </div>
+                    }
+                }
+
+              
+            </div>
+        </div>
+    </div>
+</div>

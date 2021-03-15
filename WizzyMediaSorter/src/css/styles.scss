@@ -1,0 +1,14 @@
+﻿@import "bootstrap.scss";
+@import "helper.scss";
+@import "variables.scss";
+@import "components/_components.scss";
+
+.body {
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+}
+
+.page-container {
+    padding-bottom: 80px;
+}

@@ -1,0 +1,125 @@
+﻿@using WizzyMediaSorter.Extension
+@using WizzyMediaSorter.Controllers
+@inherits UmbracoViewPage<EditMedia>
+@{
+    Layout = "Master.cshtml";
+    var mediaID = Request.QueryString["id"];
+    var mediaNode = Umbraco.Media(mediaID);
+    var list = Umbraco.MediaAtRoot();
+    var categoriesHolder = Umbraco.ContentFromUmbraco<CategoriesHolder>("Node.Categories");
+
+}
+
+@*
+    
+    testing code to be deleted
+
+    @if (mediaNode.Value("category") != null)
+{
+
+    var getMedia = Services.MediaService.GetById(Convert.ToInt32(mediaID));
+    var mediaGuidString = getMedia.GetValue("category").ToString().Substring(15, 32);
+    var mediaGuid = Guid.Parse(mediaGuidString);
+
+    foreach (var category in categoriesHolder.Children)
+    {
+        if (category.Key == mediaGuid)
+        {
+            <div>
+                YES @category.Name
+            </div>
+        }
+
+    }
+}*@
+
+
+
+
+
+<div class="categories-edit-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-listing page-listing__title-wrapper">
+
+
+                    @Model.Title
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+
+                @{
+                    using (Html.BeginUmbracoForm("updatedMyMedia", "updateMedia", FormMethod.Post))
+                    {
+
+                        foreach (var file in list)
+                        {
+                            var mediaIDInt = Int16.Parse(mediaID);
+
+                            if (@file.Id == mediaIDInt)
+                            {
+
+                                <div class="page-listing__wrapper">
+                                    <b>Name:</b>   <a href="@file.Url()">@file.Name</a>
+                                </div>
+                                <div class="page-listing__wrapper">
+                                    <b>Upload Date:</b> @file.CreateDate
+                                </div>
+                                <div class="page-listing__wrapper">
+                                    <b>File Path:</b> @file.Path
+                                </div>
+                            }
+
+
+                        }
+                        <input type="hidden" value="@mediaID" name="mediaId" />
+
+                       
+                        <div class="page-listing__options page-listing__options__wrapper">
+
+                            <select name="categoryId">
+
+                                @if (mediaNode.Value("category") != null)
+                                {
+
+                                    var getMedia = Services.MediaService.GetById(Convert.ToInt32(mediaID));
+                                    var mediaGuidString = getMedia.GetValue("category").ToString().Substring(15, 32);
+                                    var mediaGuid = Guid.Parse(mediaGuidString);
+
+                                    foreach (var category in categoriesHolder.Children)
+                                    {
+                                        if (category.Key == mediaGuid)
+                                        {
+                                            <option value="">@category.Name</option>
+                                        }
+
+
+
+                                    }
+                                }
+
+
+
+                                <option value="">Select an option</option>
+                                @foreach (var x in categoriesHolder.Children)
+                                {
+                                    <option value="@x.Id">@x.Name </option>
+                                }
+                            </select>
+                        </div>
+                        <div class="wizzy-btn__wrapper">
+                            <button type="submit" class="wizzy-btn">@Model.Name</button>
+                        </div>
+                    }
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>

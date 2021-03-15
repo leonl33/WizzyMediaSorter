@@ -1,0 +1,42 @@
+﻿@using WizzyMediaSorter.Extension
+@inherits UmbracoViewPage<Home>
+
+@{
+    Layout = "Master.cshtml";
+
+    var categories = Umbraco.ContentFromUmbraco<CategoriesHolder>("Node.Categories");
+    var media = Umbraco.MediaAtRoot();
+    var playlists = Umbraco.ContentFromUmbraco<PlaylistGroup>("Node.Playlists");
+
+}
+
+
+<div class="home-page">
+    <div class="container">
+        <div class="col">
+            <div class="home-page__content">
+                <div class="wizzy-logo">
+                    <div class="wizzy-logo__letter">W</div>
+
+                </div>
+                <div class="home-page__hero">
+
+                    <h1 class="home-page__hero-title">
+                        @Model.HeroTitle
+                    </h1>
+                </div>
+                <div>
+                    <h2 class="home-page__hero-sub">
+                        <span class="home-page__highlight"> @categories.Children.Count()</span> categor(ies) created |
+                        <span class="home-page__highlight">@media.Count()</span> File(s) uploaded |
+                        <span class="home-page__highlight">@playlists.Children.Count()</span> playlist(s) created
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

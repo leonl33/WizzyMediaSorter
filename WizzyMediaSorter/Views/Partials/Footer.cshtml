@@ -1,0 +1,12 @@
+﻿@using WizzyMediaSorter.Extension
+
+@inherits Umbraco.Web.Mvc.UmbracoViewPage
+
+@{
+    var settings = Umbraco.ContentFromUmbraco<Settings>("Node.Settings");
+}
+
+
+<div class="footer-bar" style="background-color: #@settings.FooterColour">
+    
+</div>

@@ -1,0 +1,17 @@
+﻿.wizzy-logo {
+    height: 150px;
+    width: 150px;
+    background-color: #EBEBEB;
+    border-radius: 100px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 7px #EFF3F6;
+    margin-bottom: 20px;
+
+    &__letter {
+        font-weight: 900;
+        font-size: 50px;
+    }
+}

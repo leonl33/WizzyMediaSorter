@@ -1,0 +1,25 @@
+﻿@inherits UmbracoViewPage<CreatedPlaylist>
+
+@{ 
+    var counter = 0;
+}
+
+@if (Model.MediaPicker != null)
+{
+
+    var total = Model.MediaPicker.Count();
+
+    <div class="page-listing__wrapper">
+       Total items: @total 
+    </div>
+
+    foreach (var media in Model.MediaPicker)
+    {
+        counter++;
+
+        <div class="page-listing__wrapper">
+          <span><b>@counter -</b></span>  <a href="@media.Url()">@media.Name</a>
+        </div>
+    }
+}
+

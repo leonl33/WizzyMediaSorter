@@ -1,0 +1,38 @@
+﻿@inherits UmbracoViewPage<EditCategory>
+@{
+	Layout = "Master.cshtml";
+    var categoryID = Request.QueryString["id"];
+    var categoryNode = Umbraco.Content(categoryID);
+}
+
+<div class="categories-edit-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-listing page-listing__title-wrapper">
+                    @Model.Title
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                
+                    @{
+                        using (Html.BeginUmbracoForm("updateMyCategory", "UpdateCategory", FormMethod.Post))
+                        {
+       
+                            <input type="hidden" name="catId" value="@categoryID" runat="server"/>
+                            
+                            <input type="text" placeholder="Playlist Name" class="page-listing__input" value="@categoryNode.Name" name="editCategoryVal" />
+                            <div class="wizzy-btn__wrapper">
+                                <button type="submit" class="wizzy-btn"> @Model.Name</button>
+                            </div>
+                        }
+                    }
+
+
+                
+            </div>
+        </div>
+    </div>
+</div>

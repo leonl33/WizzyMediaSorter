@@ -1,0 +1,55 @@
+﻿@using WizzyMediaSorter.Extension
+
+@inherits Umbraco.Web.Mvc.UmbracoViewPage
+
+@{
+    var settings = Umbraco.ContentFromUmbraco<Settings>("Node.Settings");
+}
+
+@*<div class="nav-bar" style="background-color: #@settings.NavColour">
+        <div class="nav-bar__title__wrapper">
+            @if (settings.NavBarTitle != null)
+            {
+                <div class="nav-bar__title">
+                    @settings.NavBarTitle
+                </div>
+
+            }
+        </div>
+        <div class="nav-bar__links__wrapper">
+            @foreach (var link in settings.NavigationLinks)
+            {
+
+            <a href="@link.Url" class="nav-bar__links">@link.Name </a>
+            }
+        </div>
+    </div>*@
+
+<div class="nav-bar" style="background-color: #@settings.NavColour">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12 ">
+                <div class="nav-bar__title__wrapper">
+                    @if (settings.NavBarTitle != null)
+                    {
+                        <div class="nav-bar__title">
+                            @settings.NavBarTitle
+                        </div>
+
+                    }
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <div class="nav-bar__links__wrapper">
+                    @foreach (var link in settings.NavigationLinks)
+                    {
+
+                        <a href="@link.Url" class="nav-bar__links">@link.Name </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

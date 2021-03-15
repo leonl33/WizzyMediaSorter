@@ -1,0 +1,30 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Wizzy Media Sorter</title>
+    <link rel="stylesheet" href="~/dist/main.styles.css" />
+    
+</head>
+<body>
+    <header>
+        @Html.Partial("Partials/NavBar")
+    </header>
+    <div class="page-container">
+
+        @RenderBody()
+
+    </div>
+    <footer>
+        @Html.Partial("Partials/Footer")
+    </footer>
+    <script src="~/dist/main.bundle.js"></script>
+</body>
+</html>
+

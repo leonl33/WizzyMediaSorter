@@ -1,0 +1,23 @@
+﻿.wizzy-btn {
+    background-color: #EFF3F6;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    color: black;
+
+    &:hover {
+        text-decoration: none;
+        color: black;
+    }
+
+    &__wrapper {
+        margin-top: 50px;
+    }
+
+    &__icon {
+        /*padding: 8px;
+        border-radius: 100px;
+        background-color: #EAEDF5;*/
+        color: $dark-gray;
+    }
+}

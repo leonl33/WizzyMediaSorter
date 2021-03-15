@@ -1,0 +1,79 @@
+﻿@using WizzyMediaSorter.Controllers
+
+@inherits UmbracoViewPage<Categories>
+
+@{
+    Layout = "Master.cshtml";
+}
+
+<div class="categories-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-listing page-listing__title-wrapper">
+                    @Model.Title
+                </div>
+            </div>
+        </div>
+
+        @foreach (var x in Model.Children)
+        {
+
+            var isCategory = x.ContentType.Alias == "CategoriesHolder";
+
+            if (!isCategory)
+            {
+                foreach (var child in x.Children)
+                {
+                    <div class="page-listing__wrapper">
+                        <div class="row">
+                            <div class="col-md-9 col-sm-12">
+                                <span> <i class="fa fa-tag page-listing__icon"></i></span>
+                                @child.Name
+
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="page-listing__crud">
+
+
+                                    <a href="/categories/edit?id=@child.Id" class="page-listing__crud__edit">
+
+                                        <i class="fa fa-pen page-listing__icon__edit"></i>
+                                        
+                                    </a>
+
+
+
+                                    <span class="page-listing__crud__d">
+                                        @{
+                                            using (Html.BeginUmbracoForm("deleteCategoryContent", "DeleteCategory", FormMethod.Post))
+                                            {
+                                                <input type="hidden" value=@child.Id name="childId" />
+
+                                                <button type="submit" class="page-listing__crud__dlt">
+                                                    <span><i class="fa fa-trash-alt"></i></span>
+                                                    
+                                                </button>
+                                            }
+                                        }
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+
+        <div class="wizzy-btn__wrapper">
+            <a href="http://localhost:60158/categories/create" class=" wizzy-btn">
+                <span><i class="fa fa-plus-circle wizzy-btn__icon"></i></span> 
+                New Category
+            </a>
+        </div>
+    </div>
+
+
+
+</div>

@@ -1,0 +1,105 @@
+﻿@using WizzyMediaSorter.Extension
+@using WizzyMediaSorter.Controllers
+
+@inherits UmbracoViewPage<MediaPage>
+@{
+    Layout = "Master.cshtml";
+    var allMedia = Umbraco.MediaAtRoot();
+    var mediaID = Request.QueryString["id"];
+    var mediaNode = Umbraco.Media(mediaID);
+    var categories = Umbraco.ContentFromUmbraco<CategoriesHolder>("Node.Categories");
+
+}
+
+<div class="media-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-listing page-listing__title-wrapper">
+                    @Model.Title
+                </div>
+            </div>
+        </div>
+
+
+        @foreach (var media in allMedia)
+        {
+            <div class="page-listing__wrapper">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <a href="@media.Url()">@media.Name</a>
+
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+
+
+                        @{
+                            var newMediaNode = Umbraco.Media(media.Id);
+
+                            if (newMediaNode.HasValue("category"))
+                            {
+                                var getMedia = Services.MediaService.GetById(Convert.ToInt32(media.Id));
+                                var getMediaGuid = getMedia.GetValue("category").ToString().Substring(15, 32);
+                                var mediaGuid = Guid.Parse(getMediaGuid);
+
+                                foreach (var category in categories.Children)
+                                {
+                                    if (category.Key == mediaGuid)
+                                    {
+                                        <span> <i class="fa fa-tag page-listing__icon"></i></span>
+                                        @category.Name
+
+                                    }
+
+                                }
+                            }
+
+
+                        }
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <div class="page-listing__crud">
+
+                            <a href="/media/edit?id=@media.Id" class="page-listing__crud__edit">
+                                <span><i class="fa fa-pen page-listing__icon__edit"></i></span>
+                            </a>
+
+
+                            <a href="~/playlist/add?id=@media.Id" class="page-listing__crud__add">
+                                <i class="fa fa-folder-plus "></i>
+                            </a>
+
+                            <div class="page-listing__crud__d">
+                                @{
+                                    using (Html.BeginUmbracoForm("DeleteMyMedia", "DeleteMedia", FormMethod.Post))
+                                    {
+                                        <input type="hidden" value="@media.Id" name="deleteMedia" />
+                                        <button type="submit" class="page-listing__crud__dlt">
+                                            <span><i class="fa fa-trash-alt"></i></span>
+
+                                        </button>
+                                    }
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+
+
+
+        <div class="wizzy-btn__wrapper">
+            <a href="http://localhost:60158/media/create" class=" wizzy-btn">
+                <span><i class="fa fa-plus-circle wizzy-btn__icon"></i></span>
+                Create Media
+            </a>
+        </div>
+
+    </div>
+</div>

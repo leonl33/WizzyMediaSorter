@@ -1,0 +1,69 @@
+﻿@using WizzyMediaSorter.Controllers
+
+@inherits UmbracoViewPage<Playlist>
+@{ Layout = "Master.cshtml"; }
+
+
+
+<div class="playlist-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-listing page-listing__title-wrapper">
+                    @Model.Title
+                </div>
+            </div>
+        </div>
+
+
+
+        @foreach (var child in Model.Descendant(4).Children())
+        {
+
+            {
+                using (Html.BeginUmbracoForm("deleteMyPlaylist", "DeletePlaylist", FormMethod.Post))
+                {
+
+<div class="page-listing__wrapper">
+    <div class="row">
+        <div class="col-9">
+            @child.Name
+        </div>
+
+        <div class="col-3">
+            <div class="page-listing__crud">
+                
+                    <a href="/playlist/edit?id=@child.Id" class="page-listing__crud__edit">
+                        <span><i class="fa fa-pen page-listing__icon__edit"></i></span>
+                    </a>
+                
+
+                <span class="page-listing__crud__d">
+                    <input type="hidden" value="@child.Id" name="playlistId" />
+                    <button type="submit" class="page-listing__crud__dlt">
+                        <span><i class="fa fa-trash-alt"></i></span>
+
+                    </button>
+
+
+
+                </span>
+            </div>
+        </div>
+
+    </div>
+</div>}
+}
+}
+
+
+
+        <div class="wizzy-btn__wrapper">
+            <a href="http://localhost:60158/playlist/create" class=" wizzy-btn">
+                <span><i class="fa fa-plus-circle wizzy-btn__icon"></i></span>
+                New Playlist
+            </a>
+        </div>
+    </div>
+
+</div>

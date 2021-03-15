@@ -1,0 +1,29 @@
+﻿.nav-bar {
+    display: flex;
+    padding: 40px 20px;
+    justify-content: space-between;
+    font-weight: 700;
+    //position: fixed;
+    
+    //z-index: 999;
+
+    &__title {
+
+
+        &__wrapper {
+        }
+    }
+
+    &__links {
+        color: black;
+        margin: 0 10px;
+
+        &:hover {
+            text-decoration: none;
+            color: black;
+        }
+
+        &__wrapper {
+        }
+    }
+}

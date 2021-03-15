@@ -1,0 +1,35 @@
+﻿@using WizzyMediaSorter.Models 
+@inherits UmbracoViewPage<CreatePlaylist>
+@{
+    Layout = "Master.cshtml";
+    var model = new CreatePlaylistModel();
+}
+
+
+<div class="categories-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-listing page-listing__title-wrapper">
+                    @Model.Title
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+                @{
+                    using (Html.BeginUmbracoForm("createPlaylistContent", "CreatePlaylist", FormMethod.Post))
+                    {
+                        <input type="text" placeholder="Playlist Title" class="page-listing__input" name="@Html.NameFor(x=>model.PlayListName)" runat="server" />
+                        <div class="wizzy-btn__wrapper">
+                            <button type="submit" class="wizzy-btn"> @Model.Name</button>
+                        </div>
+                    }
+                }
+
+                
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+﻿.page-listing {
+    font-weight: 700;
+
+    &__title-wrapper {
+        margin-top: 50px;
+    }
+
+    &__icon {
+        color: $dark-gray;
+
+        &__edit {
+            color: $dark-gray;
+        }
+
+        &__delete {
+            color: $red;
+        }
+
+        &__add {
+            color: white;
+        }
+    }
+
+    &__wrapper {
+        margin-top: 30px;
+        border-bottom: solid 1px #EFF3F6;
+        padding-bottom: 8px;
+    }
+
+    &__options {
+
+
+
+        &__wrapper {
+            margin-top: 30px;
+        }
+    }
+
+    &__upload {
+
+        &__wrapper {
+            margin-top: 30px;
+        }
+    }
+
+    &__crud {
+        display: flex;
+        justify-content: flex-end;
+
+        &__edit {
+            background-color: $light-gray;
+            padding: 4px 8px;
+            border-radius: 100px;
+            color: $dark-gray;
+
+            &:hover {
+                text-decoration: none;
+                color: $dark-gray;
+            }
+        }
+
+        &__dlt {
+            background-color: $red;
+            padding: 3px 8px;
+            border-radius: 100px;
+            border: none;
+            color: white;
+            margin-left: 10px;
+
+            &:hover {
+                text-decoration: none;
+                color: white;
+            }
+        }
+
+        &__add {
+            padding: 4px 8px;
+            margin-left: 10px;
+            background-color: $blue;
+            border-radius: 100px;
+            color: white;
+
+            &:hover {
+                text-decoration: none;
+                color: white;
+            }
+
+        }
+    }
+
+    &__input {
+        border: none;
+        width: 100%;
+        border-bottom: solid 1px #EFF3F6;
+        padding-bottom: 8px;
+        margin-top: 30px;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

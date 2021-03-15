@@ -1,0 +1,58 @@
+﻿@using WizzyMediaSorter.Controllers
+@using WizzyMediaSorter.Extension
+
+@inherits UmbracoViewPage<EditPlaylist>
+@{
+    Layout = "Master.cshtml";
+    var categoryID = Request.QueryString["id"];
+    var categoryNode = Umbraco.Content(categoryID);
+    var playListGroupNode = Umbraco.ContentFromUmbraco<PlaylistGroup>("Node.Playlists");
+}
+
+
+<div class="categories-edit-page">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-listing page-listing__title-wrapper">
+                    @Model.Title
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+                @{
+                    using (Html.BeginUmbracoForm("updateMyPlaylist", "updatePlaylist", FormMethod.Post))
+                    {
+                        <input type="hidden" value="@categoryID" name="playlistId" />
+                        <input type="text" placeholder="" class="page-listing__input" value="@categoryNode.Name" name="userInputTitle" />
+
+                        <div class="">
+
+                            @foreach (var child in playListGroupNode.Children)
+                            {
+                                var categoryIdToInt = Convert.ToInt32(categoryID);
+                                if (child.Id == categoryIdToInt)
+                                {
+
+                                    @Html.Partial("CreatedPlaylistPartial", (CreatedPlaylist)child)
+                                }
+                            }
+
+                        </div>
+
+                        <div class="wizzy-btn__wrapper">
+                            <button type="submit" class="wizzy-btn"> Done</button>
+                        </div>
+
+                    }
+                }
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
